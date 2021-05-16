@@ -1,0 +1,19 @@
+{
+  "name": "20210516_183436",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "try": "yarn ts-node -T src/test.ts entities/User.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@types/dedent": "^0.7.0",
+    "dedent": "^0.7.0",
+    "snake-case": "^3.0.4"
+  }
+}
