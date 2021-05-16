@@ -8,12 +8,12 @@ export class User {
   @Column(`BIGSERIAL PRIMARY KEY`)
   id!: string
 
-  @Column(`STRING NOT NULL DEFAULT ''`)
+  @Column(`VARCHAR(255) NOT NULL DEFAULT ''`)
   name!: string
 
   @Column(`BOOLEAN NOT NULL DEFAULT FALSE`)
   isDeleted!: string
 
-  @Column(`STRING NOT NULL DEFAULT 'online' CHECK (status in ${toSqlList(UserStatus)})`) // prettier-ignore
+  @Column(`VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ${toSqlList(UserStatus)})`) // prettier-ignore
   status!: IUserStatus
 }

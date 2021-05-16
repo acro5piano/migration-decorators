@@ -19,20 +19,11 @@ export class MigrationStorage implements UmzugStorage<Client> {
 
   async logMigration({ name, context: pg }: MigrationParams<Client>) {
     await pg.query(
-      `INSERT INTO ${this.options.tableName} (name) VALUES (${name})`,
+      `INSERT INTO ${this.options.tableName} (name) VALUES ('${name}')`,
     )
   }
 
   async unlogMigration({ name, context: pg }: MigrationParams<Client>) {
     await pg.query(`DELETE FROM ${this.options.tableName} WHERE name = ${name}`)
   }
-  //
-  // async ensureTable() {
-  //   await this.pg.query(`
-  //     CREATE TABLE IF NOT EXISTS ${this.options.tableName} (
-  //       name STRING(255) NOT NULL,
-  //       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-  //     )
-  //   `)
-  // }
 }

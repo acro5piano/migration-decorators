@@ -26,7 +26,7 @@ export class MigrationGenerator {
   async getCode() {
     return `import { Client } from 'pg'
 
-export async function up(pg: Client) {
+export async function up({ context: pg }: { context: Client }) {
   await pg.query(\`${this.schema.getCurrentTable().toCreateTableSql()}\`)
 }
         `
