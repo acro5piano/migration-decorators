@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "migration-decorators": "bin/migration-decorators.js"
+  },
   "scripts": {
-    "try": "yarn ts-node -T test.ts entities/User.ts"
+    "try": "bin/migration-decorators.js entities/User.ts"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
