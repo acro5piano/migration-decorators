@@ -1,0 +1,1 @@
+{"tables":[{"tableName":"users","columns":["id BIGSERIAL PRIMARY KEY","name STRING NOT NULL DEFAULT ''","is_deleted BOOLEAN NOT NULL DEFAULT FALSE","status STRING NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline'))"]}],"thunks":[]}
