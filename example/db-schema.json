@@ -20,7 +20,7 @@
       },
       {
         "columnName": "birth_date",
-        "expr": "TIMESTAMPTZ"
+        "expr": "TIMESTAMPTZ NOT NULL"
       }
     ]
   }

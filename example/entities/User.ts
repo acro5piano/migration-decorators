@@ -17,6 +17,6 @@ export class User {
   @Column(`VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ${toSqlList(UserStatus)})`) // prettier-ignore
   status!: IUserStatus
 
-  @Column(`TIMESTAMPTZ`) // prettier-ignore
+  @Column(`TIMESTAMPTZ NOT NULL`) // prettier-ignore
   birthDate!: Date
 }

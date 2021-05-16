@@ -21,7 +21,18 @@ export class DatabaseTable {
     if (!oldTable) {
       return this.toCreateTableSql()
     }
-    return this.columns
+    const toBeDeletedColumns = oldTable.columns
+      .filter((oldColumn) => {
+        return (
+          this.columns.find(
+            (column) => oldColumn.columnName === column.columnName,
+          ) === undefined
+        )
+      })
+      .map((oldColumn) => {
+        return this.toDropColumnSql(oldColumn)
+      })
+    const newOrAlteredColumns = this.columns
       .map((column) => {
         const oldColumn = oldTable.columns.find(
           (c) => c.columnName === column.columnName,
@@ -35,7 +46,7 @@ export class DatabaseTable {
         return this.toAddColumnSql(column)
       })
       .filter(Boolean)
-      .join(';\n')
+    return [...toBeDeletedColumns, ...newOrAlteredColumns].join(';\n')
   }
 
   toCreateTableSql() {
@@ -54,6 +65,10 @@ export class DatabaseTable {
 
   toAlterColumnSql(column: Column) {
     return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} TYPE ${column.expr}`
+  }
+
+  toDropColumnSql(column: Column) {
+    return `ALTER TABLE ${this.tableName} DROP COLUMN ${column.columnName}`
   }
 
   toJson(): DatabaseTableJson {
