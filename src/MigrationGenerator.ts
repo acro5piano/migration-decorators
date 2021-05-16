@@ -23,10 +23,18 @@ export class MigrationGenerator {
   }
 
   async getCode() {
+    const sqls = this.schema.tables
+      .map((table) => {
+        const old = this.oldSchema?.tables.find(
+          (t) => table.tableName === t.tableName,
+        )
+        return table.toSql(old)
+      })
+      .join(';\n')
     return `import { Client } from 'pg'
 
 export async function up({ context: pg }: { context: Client }) {
-  await pg.query(\`${this.schema.getCurrentTable().toCreateTableSql()}\`)
+  await pg.query(\`${sqls}\`)
 }
         `
   }

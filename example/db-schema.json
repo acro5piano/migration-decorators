@@ -2,10 +2,22 @@
   {
     "tableName": "users",
     "columns": [
-      "id BIGSERIAL PRIMARY KEY",
-      "name VARCHAR(255) NOT NULL DEFAULT ''",
-      "is_deleted BOOLEAN NOT NULL DEFAULT FALSE",
-      "status VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline'))"
+      {
+        "columnName": "id",
+        "expr": "BIGSERIAL PRIMARY KEY"
+      },
+      {
+        "columnName": "name",
+        "expr": "VARCHAR(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "columnName": "is_deleted",
+        "expr": "BOOLEAN NOT NULL DEFAULT FALSE"
+      },
+      {
+        "columnName": "status",
+        "expr": "VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline'))"
+      }
     ]
   }
 ]
