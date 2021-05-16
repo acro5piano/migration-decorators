@@ -24,4 +24,8 @@ export class DatabaseSchema {
     this.thunks.forEach((thunk) => thunk())
     this.thunks = []
   }
+
+  toJson() {
+    return this.tables.map((table) => table.toJson())
+  }
 }

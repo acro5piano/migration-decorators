@@ -1,3 +1,8 @@
+interface DatabaseTableJson {
+  tableName: string
+  columns: string[]
+}
+
 export class DatabaseTable {
   columns: string[] = []
 
@@ -13,5 +18,18 @@ export class DatabaseTable {
         ${this.columns.map((c) => `${c}`).join(',\n        ')}
       )
     `
+  }
+
+  toJson(): DatabaseTableJson {
+    return {
+      tableName: this.tableName,
+      columns: this.columns,
+    }
+  }
+
+  static fromJson(json: DatabaseTableJson) {
+    const table = new DatabaseTable(json.tableName)
+    table.columns = json.columns
+    return table
   }
 }
