@@ -19,6 +19,16 @@ export class MigrationGenerator {
     })
 
     const filePath = resolve(dirPath, `${timestamp}.ts`)
-    await writeFile(filePath, JSON.stringify(this.schema), 'utf8')
+    console.log(await this.getCode())
+    await writeFile(filePath, await this.getCode(), 'utf8')
+  }
+
+  async getCode() {
+    return `import { Client } from 'pg'
+
+export async function up(pg: Client) {
+  await pg.query(\`${this.schema.getCurrentTable().toCreateTableSql()}\`)
+}
+        `
   }
 }

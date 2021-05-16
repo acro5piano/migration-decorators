@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd example
-../bin/migration-decorators.js entities/*
+../bin/migration-decorators.js generate entities/*

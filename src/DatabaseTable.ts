@@ -10,7 +10,7 @@ export class DatabaseTable {
   toCreateTableSql() {
     return `
       CREATE TABLE ${this.tableName} (
-        ${this.columns.join(',\n')}
+        ${this.columns.map((c) => `${c}`).join(',\n        ')}
       )
     `
   }
