@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "try": "yarn ts-node -T src/test.ts entities/User.ts"
+    "try": "yarn ts-node -T test.ts entities/User.ts"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",

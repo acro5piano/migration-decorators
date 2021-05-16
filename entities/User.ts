@@ -1,4 +1,4 @@
-import { Column, Table, toSqlList } from '../src/ActiveMigration'
+import { Column, Table, toSqlList } from '../src'
 
 const UserStatus = ['online', 'away', 'offline']
 type IUserStatus = keyof typeof UserStatus
