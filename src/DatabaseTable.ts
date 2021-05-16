@@ -53,7 +53,7 @@ export class DatabaseTable {
   }
 
   toAlterColumnSql(column: Column) {
-    return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} ${column.expr}`
+    return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} TYPE ${column.expr}`
   }
 
   toJson(): DatabaseTableJson {
