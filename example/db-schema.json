@@ -17,6 +17,10 @@
       {
         "columnName": "status",
         "expr": "VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline'))"
+      },
+      {
+        "columnName": "birth_date",
+        "expr": "TIMESTAMP"
       }
     ]
   }

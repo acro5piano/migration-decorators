@@ -19,7 +19,10 @@ export class MigrationGenerator {
       }
     })
     const filePath = resolve(dirPath, `${timestamp}.ts`)
-    await writeFile(filePath, await this.getCode(), 'utf8')
+    const code = await this.getCode()
+    if (code) {
+      await writeFile(filePath, code, 'utf8')
+    }
   }
 
   async getCode() {
@@ -30,11 +33,14 @@ export class MigrationGenerator {
         )
         return table.toSql(old)
       })
-      .join(';\n')
+      .filter(Boolean)
+    if (sqls.length === 0) {
+      return null
+    }
     return `import { Client } from 'pg'
 
 export async function up({ context: pg }: { context: Client }) {
-  await pg.query(\`${sqls}\`)
+  await pg.query(\`${sqls.join(';\n')}\`)
 }
         `
   }
