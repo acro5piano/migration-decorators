@@ -1,4 +1,4 @@
-import { DatabaseTable } from './DatabaseTable'
+import { DatabaseTable, DatabaseTableJson } from './DatabaseTable'
 
 export class DatabaseSchema {
   tables: DatabaseTable[] = []
@@ -25,7 +25,13 @@ export class DatabaseSchema {
     this.thunks = []
   }
 
-  toJson() {
+  toJson(): DatabaseTableJson[] {
     return this.tables.map((table) => table.toJson())
+  }
+
+  static fromJson(json: DatabaseTableJson[]) {
+    const schema = new DatabaseSchema()
+    schema.tables = json.map((j) => DatabaseTable.fromJson(j))
+    return schema
   }
 }

@@ -1,4 +1,4 @@
-interface DatabaseTableJson {
+export interface DatabaseTableJson {
   tableName: string
   columns: string[]
 }

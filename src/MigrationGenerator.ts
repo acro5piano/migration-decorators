@@ -3,7 +3,10 @@ import { resolve } from 'path'
 import { DatabaseSchema } from './DatabaseSchema'
 
 export class MigrationGenerator {
-  constructor(private schema: DatabaseSchema) {}
+  constructor(
+    private schema: DatabaseSchema,
+    private oldSchema?: DatabaseSchema,
+  ) {}
 
   async generate() {
     // Thanks https://github.com/mikro-orm/mikro-orm/blob/9c37f6141d8723d6c472dfd3557a1d749d344455/packages/migrations/src/MigrationGenerator.ts#L14
