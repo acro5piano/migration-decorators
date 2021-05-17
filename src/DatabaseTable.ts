@@ -1,3 +1,5 @@
+import { isNotNullable, getDefault } from './helpers'
+
 interface Column {
   columnName: string
   expr: string
@@ -38,6 +40,19 @@ export class DatabaseTable {
           (c) => c.columnName === column.columnName,
         )
         if (oldColumn) {
+          if (oldColumn.expr === column.expr) {
+            return null
+          }
+          const defaultValue = getDefault(column.expr)
+          if (defaultValue && getDefault(oldColumn.expr) !== defaultValue) {
+            return this.toAlterColumnDefaultSql(column, defaultValue)
+          }
+          if (isNotNullable(oldColumn.expr) && !isNotNullable(column.expr)) {
+            return this.toAlterColumnNotNullableSql(column)
+          }
+          if (!isNotNullable(oldColumn.expr) && isNotNullable(column.expr)) {
+            return this.toAlterColumnNullableSql(column)
+          }
           if (oldColumn.expr !== column.expr) {
             return this.toAlterColumnSql(column)
           }
@@ -65,6 +80,18 @@ export class DatabaseTable {
 
   toAlterColumnSql(column: Column) {
     return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} TYPE ${column.expr}`
+  }
+
+  toAlterColumnNotNullableSql(column: Column) {
+    return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} NOT NULL`
+  }
+
+  toAlterColumnNullableSql(column: Column) {
+    return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} DROP NOT NULL`
+  }
+
+  toAlterColumnDefaultSql(column: Column, defaultValue: string) {
+    return `ALTER TABLE ${this.tableName} ALTER COLUMN ${column.columnName} SET DEFAULT ${defaultValue}`
   }
 
   toDropColumnSql(column: Column) {

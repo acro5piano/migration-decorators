@@ -20,7 +20,7 @@
       },
       {
         "columnName": "birth_date",
-        "expr": "TIMESTAMPTZ NOT NULL"
+        "expr": "TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP"
       }
     ]
   }

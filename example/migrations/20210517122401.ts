@@ -6,7 +6,8 @@ export async function up({ context: pg }: { context: Client }) {
         id BIGSERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL DEFAULT '',
         is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
-        status VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline'))
+        status VARCHAR(50) NOT NULL DEFAULT 'online' CHECK (status in ('online', 'away', 'offline')),
+        birth_date TIMESTAMPTZ NOT NULL
       )
     `)
 }
