@@ -15,7 +15,7 @@ export class User {
   @Column(`BIGSERIAL PRIMARY KEY`)
   id!: string
 
-  @Column(`STRING NOT NULL DEFAULT ''`)
+  @Column(`VARCHAR(255) NOT NULL DEFAULT ''`)
   name!: string
 
   @Column(`BOOLEAN NOT NULL DEFAULT FALSE`)
